@@ -23,6 +23,8 @@ class Compiler(object):
             
             p = parser.statement(syntax_tree.insertSubtree("STATEMENT"))
 
+            syntax_tree.printSyntaxTree(0)
+
             vm_code = Semantic(syntax_tree).generate()
             
             vm = magic_machine(vm_code)

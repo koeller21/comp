@@ -5,7 +5,7 @@
 #  c = 1;
 #}
 
-x = c * 2;
 
-#c = 20;
-# TODO es geht nicht x = c; 
+# TODO Strings
+
+

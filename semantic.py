@@ -30,13 +30,13 @@ class Semantic():
 			semicolon = top.children[1]
 			stmt = top.children[2]
 
-			# print(nxt_stmt.get_token())
-			# print(nxt_stmt.get_value())
-			# print(semicolon.get_token())
-			# print(semicolon.get_value())
+			print(nxt_stmt.get_token())
+			print(nxt_stmt.get_value())
+			print(semicolon.get_token())
+			print(semicolon.get_value())
 			
-			# print(stmt.get_token())
-			# print(stmt.get_value())
+			print(stmt.get_token())
+			print(stmt.get_value())
 
 			if nxt_stmt.get_token() == "ASSIGNMENT":
 				return n + self.semantic_statement(stmt, self.assignment_statement(nxt_stmt))

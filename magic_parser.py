@@ -16,7 +16,6 @@ class Parser(object):
         if self.lookAhead(functionDefinitionSet):
             return self.function_definition(syntax_tree.insertSubtree(token.FUNCTIONDEF)) and self.statement(syntax_tree.insertSubtree(token.STATEMENT))
         elif self.lookAhead(identifierSet):
-            print(self.cur_token.get_next().get_next().get_token_type())
             if self.cur_token.get_next().get_next().get_token_type() == token.OPEN_PARA: # statement ist funktionsaufruf
                 return self.application_statement(syntax_tree.insertSubtree(token.APPLICATION)) and self.match(semicolonSet, syntax_tree) and self.statement(syntax_tree.insertSubtree(token.STATEMENT))
             else:                                                           # statement ist variablenzuweisung
@@ -135,7 +134,7 @@ class Parser(object):
                     return self.boolExpression(syntax_tree.insertSubtree(token.BOOLEXPR))
                 elif self.match(varStringSet, syntax_tree):
                     return True
-                elif self.lookAhead(identifierSet) or self.cur_token.get_next().get_next().get_token_type() == token.OPEN_PARA:
+                elif self.lookAhead(identifierSet) and self.cur_token.get_next().get_next().get_token_type() == token.OPEN_PARA:
                     return self.application_statement(syntax_tree.insertSubtree(token.APPLICATION))
                 elif self.match(identifierSet, syntax_tree):
                     return True

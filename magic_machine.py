@@ -102,30 +102,29 @@ class magic_machine():
         elif PUSH_VARIABLE[1:-1] in code:
             #print(code)
             val = self.get_value_of_id(code[len(PUSH_VARIABLE[1:]):])
+            if val == None:
+                print("No such variable initialized: " + code[len(PUSH_VARIABLE[1:]):])
+                exit(-1)
             self.push_stack(val)
         elif MUL[1:] in code:
-         #   print(self.get_stack())
             val2 = self.pop_stack()
             val1 = self.pop_stack()
-            result = float(val1) * float(val2)
+            result = int(val1) * int(val2)
             self.push_stack(result)
         elif DIV[1:] in code:
-         #   print(self.get_stack())
             val2 = self.pop_stack()
             val1 = self.pop_stack()
-            result = float(val1) / float(val2)
+            result = int(val1) / int(val2)
             self.push_stack(result)
         elif ADD[1:] in code:
-         #   print(self.get_stack())
             val2 = self.pop_stack()
             val1 = self.pop_stack()
-            result = float(val1) + float(val2)
+            result = int(val1) + int(val2)
             self.push_stack(result)
         elif SUB[1:] in code:
-         #   print(self.get_stack())
             val2 = self.pop_stack()
             val1 = self.pop_stack()
-            result = float(val1) - float(val2)
+            result = int(val1) - int(val2)
             self.push_stack(result)
         elif AND[1:] in code:
             val2 = self.pop_stack()
