@@ -140,14 +140,14 @@ class magic_machine():
         elif ST[1:] in code:
             val2 = self.pop_stack()
             val1 = self.pop_stack()
-            if val1 < val2:
+            if int(val1) < int(val2):
                 self.push_stack(1)
             else:
                 self.push_stack(0)
         elif GT[1:] in code:
             val2 = self.pop_stack()
             val1 = self.pop_stack()
-            if val1 > val2:
+            if int(val1) > int(val2):
                 self.push_stack(1)
             else:
                 self.push_stack(0)
