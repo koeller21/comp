@@ -1,14 +1,9 @@
 # test-programm magic
 
 
-
-magic abc(a, b){
-  b = 2;
-  return b;
+if(1<2){
+  c =1;
 }
 
-
-c = 1;
-d = 5;
-
-x = abc(c, d);
+# c = 20;
+# TODO es geht nicht x = c; 
