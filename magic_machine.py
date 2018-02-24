@@ -1,4 +1,4 @@
-FUNCTION = ";FUNC "
+FUNCTION = ";FUNCTION "
 POP_VARIABLE = ";POP VARIABLE "
 PUSH_CONSTANT = ";PUSH CONSTANT "
 PUSH_VARIABLE = ";PUSH VARIABLE "
@@ -94,13 +94,10 @@ class magic_machine():
         if PUSH_CONSTANT[1:-1] in code:
            
             self.push_stack(code[len(PUSH_CONSTANT[1:]):])
-            #print(self.get_stack())
         elif POP_VARIABLE[1:-1] in code:
             val = self.pop_stack()
             self.add_to_symbol_table(code[len(POP_VARIABLE[1:]):], val)
-            #print(self.get_symbol_table())
         elif PUSH_VARIABLE[1:-1] in code:
-            #print(code)
             val = self.get_value_of_id(code[len(PUSH_VARIABLE[1:]):])
             if val == None:
                 print("No such variable initialized: " + code[len(PUSH_VARIABLE[1:]):])
