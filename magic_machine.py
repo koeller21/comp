@@ -17,7 +17,7 @@ ST = ";ST"
 GT = ";GT"
 GOFALSE = ";GOFALSE"
 GOTRUE = ";GOTRUE"
-LABEL = ";LABEL "
+LABEL = ";LABEL"
 
 
 class magic_machine():
@@ -26,8 +26,12 @@ class magic_machine():
     def __init__(self, vm_code):
         self.ip = 0 #instruction pointer
         self.code_memory = vm_code.split(";")[1:]
+        print(self.code_memory)
+        self.label_table = []
+        self.build_label_table()
         self.stack = []
         self.symbol_table = []
+        
 
     ################ stack methoden #####################
 
@@ -58,6 +62,25 @@ class magic_machine():
         return self.symbol_table
 
 
+    ############## labeltabellen methoden ################
+
+    def build_label_table(self):
+        for cnt, cmd in enumerate(self.code_memory):
+            if LABEL[1:] in cmd:
+                self.add_to_label_table(cmd[6:], cnt)
+
+    def add_to_label_table(self, label, pos):
+        self.label_table.append([label, pos])
+
+    def get_label_position(self, label):
+        for lbls in self.label_table:
+            if lbls[0] == label:
+                return lbls[1]
+        return None
+
+    def get_label_table(self):
+        return self.label_table
+
     ################ vm methoden ########################
 
     def run(self):
@@ -67,7 +90,7 @@ class magic_machine():
             self.ip = self.ip + 1
 
     def interpret(self, code):
-        print(code)
+        #print(code)
         if PUSH_CONSTANT[1:-1] in code:
            
             self.push_stack(code[len(PUSH_CONSTANT[1:]):])
@@ -121,5 +144,20 @@ class magic_machine():
                 self.push_stack(1)
             else:
                 self.push_stack(0)
+        elif GT[1:] in code:
+            val2 = self.pop_stack()
+            val1 = self.pop_stack()
+            if val1 > val2:
+                self.push_stack(1)
+            else:
+                self.push_stack(0)
         elif GOFALSE[1:] in code:
-            pass
+            val = self.pop_stack()
+            if val == 0:
+                new_ip = self.get_label_position(code[8:])
+                self.ip = int(new_ip)
+        elif GOTRUE[1:] in code:
+            val = self.pop_stack()
+            if val == 1:
+                new_ip = self.get_label_position(code[7:])
+                self.ip = int(new_ip)

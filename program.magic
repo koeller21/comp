@@ -1,9 +1,12 @@
 # test-programm magic
 
 
-if(1<2){
-  c =1;
+if( 1 < 2){
+  c = 1;
+
+}else{
+  x = 2;
 }
 
-# c = 20;
+#c = 20;
 # TODO es geht nicht x = c; 

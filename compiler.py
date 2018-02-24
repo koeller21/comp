@@ -29,6 +29,7 @@ class Compiler(object):
             vm.run()
             print(vm.get_symbol_table())
             print(vm.get_stack())
+            print(vm.get_label_table())
 			
 
 
