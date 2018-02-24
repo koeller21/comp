@@ -1,0 +1,14 @@
+# test-programm magic
+
+
+
+magic abc(a, b){
+  b = 2;
+  return b;
+}
+
+
+c = 1;
+d = 5;
+
+x = abc(c, d);

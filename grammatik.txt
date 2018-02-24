@@ -1,0 +1,66 @@
+<--
+Hier wird unsere Grammatik definiert. Die funktionale Programmiersprache heißt Magic.
+Stand: 08.02.2018
+ReserveWords = [ ";", ",", "(", ")", "=", "+", "-", "*", "/", "{", "}", "magic", "return"]
+-->
+
+MagicCode -> Statement
+Statement -> Statement; Statement #Falsch?
+          -> AssignmentStatement; Statement                       { statement.f(z) = statement.f(AssignmentStatement.f(z))}
+          -> ApplicationStatement; Statement
+          -> FunctionDefinition; Statement
+          -> conditional; Statement
+          -> ReturnStatement
+          -> ε
+
+AssignmentStatement -> identifier '=' expression
+                    -> identifier '=' identifier
+                    -> identifier '=' var_string
+                    -> identifier '=' bool_expression
+                    -> identifier '=' ApplicationStatement
+
+
+        expression -> term rightExpression                        { expression.f(z) = rightExpression.f(term.f(z)) }
+        rightExpression -> '+' term rightExpression               { rightExpression.f(z) = z + rightExpression.f(term.f(z2)) }
+        rightExpression -> ‘‐' term rightExpression               { rightExpression.f(z) = z - rightExpression.f(term.f(z2)) }
+        rightExpression -> ε                                      { rightExpression.f(z) = z }
+        term -> operator rightTerm                                { term.f(z) = rightTerm.f(operator.f(z))  }
+        rightTerm -> '*' operator rightTerm                       { rightTerm.f(z) = z * rightTerm.f(operator.f(z)) }
+        rightTerm -> ‘/' operator rightTerm                       { rightTerm.f(z) = z / rightTerm.f(operator.f(z)) }
+        rightTerm -> ε                                            { rightTerm.f(z) = z }
+        operator -> '(' expression ')' | var_num | identifier     { operator.f(z) = ( expression.f(z) ) } {operator.f(z) = identifier.f(z)} {operator.f(z) = var_num.f(z)} {var_num.f(z) = 1 | 2 | 3 | ...}
+
+
+        boolExpression -> termbool rightExprbool                     { boolExpression.f(z) = rightExprbool.f(termbool.f(z)) }
+        rightExprbool -> '==' termbool rightExprbool              { rightExprbool.f(z) = z == rightExprbool.f(termbool.f(z2)) }
+        rightExprbool -> ‘!=' termbool rightExprbool              { rightExprbool.f(z) = z != rightExprbool.f(termbool.f(z2)) }
+        rightExprbool -> ε                                      { rightExprbool.f(z) = z }
+        termbool -> operatorbool rightTermBool                                { termbool.f(z) = rightTermBool.f(operatorbool.f(z))  }
+        rightTermBool -> '&&' operatorbool rightTermBool                      { rightTermBool.f(z) = z && rightTermBool.f(operatorbool.f(z)) }
+        rightTermBool -> '||' operatorbool rightTermBool                      { rightTermBool.f(z) = z || rightTermBool.f(operatorbool.f(z)) }
+        rightTermBool -> '>' operatorbool rightTermBool                       { rightTermBool.f(z) = z > rightTermBool.f(operatorbool.f(z)) }
+        rightTermBool -> '<' operatorbool rightTermBool                       { rightTermBool.f(z) = z < rightTermBool.f(operatorbool.f(z)) }
+        rightTermBool -> ε                                                    { rightTermBool.f(z) = z }
+        operatorbool -> '(' boolExpression ')' | identifier | var_num         { operatorbool.f(z) = ( boolExpression.f(z) ) } {operatorbool.f(z) = identifier.f(z)} {operatorbool.f(z) = var_num.f(z)} {var_num.f(z) = 1 | 2 | 3 | ...}
+                        | var_bool                                            { operatorbool.f(z) = var_bool.f(z)} {var_bool.f(z) = true | false}
+
+ApplicationStatement -> FunctionName(parameter)
+        parameter -> identifier R
+                  -> ε
+        R -> ',' parameter R
+          -> ε
+
+FunctionDefinition -> 'magic' identifier '(' parameter ')' '{' statement '}'
+
+            parameter -> identifier R
+                      -> ε
+            R -> ',' parameter R
+              -> ε
+
+conditional  -> 'if' '(' boolExpression ')' '{' statements '}' cond_else
+cond_else    -> 'else' '{' statements '}'
+             -> ε
+             # was mit if (Fragen an Ritschel)
+             # wie expression zu logischen ausdrücken erweitern ?
+
+ReturnStatement -> 'return' var_num | 'return' var_bool | 'return' var_string
