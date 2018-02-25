@@ -281,7 +281,6 @@ class Semantic():
 
 	# ReturnStatement -> 'return' var_num | 'return' var_bool | 'return' var_string | 'return' identifier
 	def semantic_return(self, top):
-		print(top.children)
 
 		if len(top.children) == 2:
 			return_stmt = top.children[0]

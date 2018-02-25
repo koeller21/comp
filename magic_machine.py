@@ -31,7 +31,29 @@ class magic_machine():
         self.build_label_table()
         self.stack = []
         self.symbol_table = []
-        
+        self.function_table = []
+        self.build_function_table()
+        self.function_pointer = 0
+
+
+    ################ function table methoden ##############
+
+    def build_function_table(self):
+        for cnt, cmd in enumerate(self.code_memory):
+            if FUNCTION[1:] in cmd:
+                self.add_to_function_table(cmd[9:], cnt)
+    
+    def add_to_function_table(self, func_name, pos):
+        self.function_table.append([func_name, pos])
+
+    def get_position_of_function(self, func_name):
+        for func in self.function_table:
+            if func[0] == func_name:
+                return func[1]
+        return None 
+
+    def get_function_table(self):
+        return self.function_table
 
     ################ stack methoden #####################
 
@@ -90,10 +112,10 @@ class magic_machine():
             self.ip = self.ip + 1
 
     def interpret(self, code):
-        #print(code)
+        print(code)
         if PUSH_CONSTANT[1:-1] in code:
-           
             self.push_stack(code[len(PUSH_CONSTANT[1:]):])
+            print(self.get_stack())            
         elif POP_VARIABLE[1:-1] in code:
             val = self.pop_stack()
             self.add_to_symbol_table(code[len(POP_VARIABLE[1:]):], val)
@@ -103,6 +125,8 @@ class magic_machine():
                 print("No such variable initialized: " + code[len(PUSH_VARIABLE[1:]):])
                 exit(-1)
             self.push_stack(val)
+            print(self.get_stack())
+            
         elif MUL[1:] in code:
             val2 = self.pop_stack()
             val1 = self.pop_stack()
@@ -160,4 +184,14 @@ class magic_machine():
         elif FUNCTION[1:] in code:
             pass
         elif RETURN[1:] in code:
-            print(code)
+            print(self.get_stack())
+            self.ip = self.function_pointer + 1
+        elif CALL[1:] in code:
+            self.function_pointer = self.ip
+            func_name = code[5:]
+            new_ip = self.get_position_of_function(func_name)
+            if new_ip != None:
+                self.ip = int(new_ip)
+            
+                
+
