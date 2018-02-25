@@ -33,7 +33,8 @@ class magic_machine():
         self.symbol_table = []
         self.function_table = []
         self.build_function_table()
-        self.function_pointer = 0
+        self.function_pointer = 0 # will be obsolet
+        #self.global_stack = []
 
 
     ################ function table methoden ##############
@@ -202,7 +203,7 @@ class magic_machine():
         elif RETURN[1:] in code:
             self.ip = self.function_pointer
         elif CALL[1:] in code:
-            #print(self.get_symbol_table())
+            
             self.function_pointer = self.ip
             func_name = code[5:]
             new_ip = self.get_position_of_function(func_name)

@@ -3,11 +3,7 @@
 
 magic abc(a){
   k = a + 1;
-  if( k > 10){
-    return 1;
-  }else{
-    abc(k);
-  }  
+  return k; 
 }
 
 c = 2;
