@@ -1,11 +1,16 @@
 # test-programm magic
 
 
-#if( (1 < 2) && (2 < 3) ){ boolschen ausdruck debuggen
-#  c = 1;
-#}
 
+c = 1;
+d = 2;
+
+x = abc(c, d);
+
+magic abc(a, b){
+  a = 2;
+  return a;
+}
 
 # TODO Strings
-
 

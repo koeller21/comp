@@ -157,3 +157,7 @@ class magic_machine():
             if val == 1:
                 new_ip = self.get_label_position(code[7:])
                 self.ip = int(new_ip)
+        elif FUNCTION[1:] in code:
+            pass
+        elif RETURN[1:] in code:
+            print(code)
