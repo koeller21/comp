@@ -1,16 +1,21 @@
 # test-programm magic
 
-
-
-c = 1;
-d = 2;
-
-x = abc(c, d);
-
-magic abc(a, b){
-  k = 2 * a;
-  return k;
+magic abc(a){
+  k = a + 1;
+  z = abc(k);
+  return z;
+  
+  
+  
+  
 }
+
+c = 2;
+
+x = abc(c);
+
+
+
 
 # TODO Strings
 
