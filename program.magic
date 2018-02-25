@@ -1,4 +1,5 @@
-# test-programm magic
+
+# hallo
 
 magic abc(a){
   k = a + 1;
@@ -16,5 +17,4 @@ x = abc(c);
 
 
 
-# TODO Strings
 
