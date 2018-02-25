@@ -72,19 +72,20 @@ class magic_machine():
     ############### symboltabellen methoden #############
 
     def add_to_symbol_table(self, id, value):
-        self.symbol_table.append([id,value])
-
-    def get_value_of_id(self, id):
-        print(self.get_symbol_table())
-        intermediate = ""
+        hasChanged = False
         for symbol in self.symbol_table:
             if symbol[0] == id:
-                intermediate = symbol[1]
-        print(intermediate)
-        if intermediate != "":
-            return intermediate
-        else:
-            return None
+                symbol[1] = value
+                hasChanged = True
+        if hasChanged == False:
+            self.symbol_table.append([id,value])
+
+    def get_value_of_id(self, id):
+        #print(self.get_symbol_table())
+        for symbol in self.symbol_table:
+            if symbol[0] == id:
+                return symbol[1]
+        return None
 
     def get_symbol_table(self):
         return self.symbol_table
@@ -115,10 +116,14 @@ class magic_machine():
 
         while self.ip < len(self.code_memory):
             self.interpret(self.code_memory[self.ip])
+            print(self.get_stack())
+            print(self.get_symbol_table())
+            print("============")
             self.ip = self.ip + 1
 
     def interpret(self, code):
         print(code)
+        
         if PUSH_CONSTANT[1:-1] in code:
             self.push_stack(code[len(PUSH_CONSTANT[1:]):])
             #print(self.get_stack())            
@@ -178,7 +183,7 @@ class magic_machine():
             else:
                 self.push_stack(0)
         elif GOFALSE[1:] in code:
-            print(self.get_stack())
+            #print(self.get_stack())
             val = self.pop_stack()
             if val == 0:
                 new_ip = self.get_label_position(code[8:])
@@ -197,7 +202,7 @@ class magic_machine():
         elif RETURN[1:] in code:
             self.ip = self.function_pointer
         elif CALL[1:] in code:
-            print(self.get_symbol_table())
+            #print(self.get_symbol_table())
             self.function_pointer = self.ip
             func_name = code[5:]
             new_ip = self.get_position_of_function(func_name)

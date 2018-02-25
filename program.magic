@@ -2,12 +2,11 @@
 
 magic abc(a){
   k = a + 1;
-  z = abc(k);
-  return z;
-  
-  
-  
-  
+  if( k > 10){
+    return 1;
+  }else{
+    abc(k);
+  }  
 }
 
 c = 2;
