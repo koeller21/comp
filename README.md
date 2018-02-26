@@ -28,7 +28,7 @@ magic fac(n){
 }
 
 i = 5;
-fac(i);
+res = fac(i);
 ```
 
 # Themenvergabe
