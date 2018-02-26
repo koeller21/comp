@@ -32,18 +32,24 @@ class magic_machine():
         self.ip = 0 #instruction pointer
         self.code_memory = vm_code.split(";")[1:]
         print(self.code_memory)
+        
         self.label_table = []
-        self.build_label_table()
+        self.build_label_table() #build initial label table
+        
         self.stack = []
+
         self.symbol_table = []
+        self.create_symbol_table_for_function_call() # build initial symbol table
+        
         self.function_table = []
-        self.build_function_table()
+        self.build_function_table() # build initial function table
+        
         self.function_stack = []
 
     ################ function stack methoden ##############
 
     def push_function_stack(self, value):
-        self.function_stack.insert(0, value)
+        self.function_stack.insert(0,value)
 
     def pop_function_stack(self):
         val = self.function_stack[0]
@@ -88,21 +94,29 @@ class magic_machine():
     
     ############### symboltabellen methoden #############
 
+    def create_symbol_table_for_function_call(self):
+        self.symbol_table.insert(0,[])
+   
+
     def add_to_symbol_table(self, id, value):
         hasChanged = False
-        for symbol in self.symbol_table:
+        for symbol in self.symbol_table[0]:
             if symbol[0] == id:
                 symbol[1] = value
                 hasChanged = True
         if hasChanged == False:
-            self.symbol_table.append([id,value])
+            self.symbol_table[0].append([id,value])
 
     def get_value_of_id(self, id):
-        #print(self.get_symbol_table())
-        for symbol in self.symbol_table:
-            if symbol[0] == id:
-                return symbol[1]
+        
+        for entry in self.symbol_table:
+            for symbol in entry:
+                if symbol[0] == id:
+                    return symbol[1]
         return None
+
+    def pop_symbol_entries(self):
+        self.symbol_table.pop(0)
 
     def get_symbol_table(self):
         return self.symbol_table
@@ -132,10 +146,11 @@ class magic_machine():
     def run(self):
 
         while self.ip < len(self.code_memory):
-            time.sleep(1)
+            #time.sleep(1)
             self.interpret(self.code_memory[self.ip])
-            print(self.get_stack())
-            print(self.get_symbol_table())
+            print("Stack : " + str(self.get_stack()))
+            print("Symbol Tabellen :" + str(self.get_symbol_table()))
+            print("Function Stack : " + str(self.get_function_stack()))
             print("============")
             self.ip = self.ip + 1
 
@@ -228,10 +243,12 @@ class magic_machine():
                     self.ip = counter
  
         elif RETURN[1:] in code:
-            print("================ " + str(self.get_function_stack()))
+           
             self.ip = self.pop_function_stack()
+            self.pop_symbol_entries()
             
         elif CALL[1:] in code:
+            self.create_symbol_table_for_function_call()
             self.push_function_stack(self.ip)
             func_name = code[5:]
             new_ip = self.get_position_of_function(func_name)

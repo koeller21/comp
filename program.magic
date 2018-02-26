@@ -2,24 +2,32 @@
 # hallo
 # todo 
 # rekursion machen
-# stack aufraeumen wenn es geht
+# return immer im else?
 # strings? imports?
 # print befehl
+
+#magic fac(n){
+#  if( n < 3){
+#    k = 1 + n;
+#    return fac(k);
+#  }else{
+#    return n;
+#  }  
+#}
 
 magic fac(n){
   if( n == 1){
     return 1;
   }else{
     a = n - 1;
-    b = fac(a);
-    c = b * n;
-    return c;
+    k = fac(a);
+    x = k * n;
+    return x;
   }
-  
 }
 
 
-i = 2;
+i = 5;
 
 erg = fac(i);
 
