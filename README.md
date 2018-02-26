@@ -14,7 +14,7 @@ Das Programm muss mit der Datei  Dateiname.magic geschrieben werden.
 Um eine Funktion zu definieren, muss das Wort "magic" vor dem Funktionsnamen geschrieben sein. Siehe Beispiel:
   
 # Beispiel
-### Fakultät 
+### Fakultät berechnen
 ```
 magic fac(n){
   if( n == 1){
