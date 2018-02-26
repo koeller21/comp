@@ -28,7 +28,7 @@ class Compiler(object):
             
             parser = Parser(token_head)
             
-            p = parser.statement(syntax_tree.insertSubtree("STATEMENT"))
+            parser.statement(syntax_tree.insertSubtree("STATEMENT"))
 
             syntax_tree.printSyntaxTree(0)
 
@@ -36,7 +36,7 @@ class Compiler(object):
             
             vm = magic_machine(vm_code)
             vm.run()
-            
+
             print(vm.get_symbol_table())
             print(vm.get_stack())
             print(vm.get_label_table())
