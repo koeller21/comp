@@ -1,6 +1,13 @@
 # Magic Compiler
 Hier stellen wir den Compiler der neuen Programmiersprache *Magic* vor!
 
+In Zusammenarbeit mit:
+
+* [Butterbee1609](https://github.com/butterbee1609)
+* [bene77](https://github.com/bene77)
+* [fabi329](https://github.com/fabi329)
+* [vannychan](https://github.com/vannychan)
+
 # Vorraussetzungen
 Python 3.x muss intalliert sein. 
 
