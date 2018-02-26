@@ -53,9 +53,9 @@ e = 7;
  
 magic egcd(a, b){
   if( b == 0){
-
+    return 1;
   }else{
-    
+    return 0;
   }
 }
 

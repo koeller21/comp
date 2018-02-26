@@ -4,11 +4,18 @@ from semantic import Semantic
 from magic_machine import magic_machine
 import scanner
 import token
+import argparse # for command line arguments
 
 class Compiler(object):    
 
     def __init__(self):
         pass
+
+    def parseArguments(self):
+        argparser = argparse.ArgumentParser(description="Compiler for the new programming language magic!")
+        argparser.add_argument("file", type=str)
+        argparser.add_argument("-d","--debug", required=False)
+        return argparser.parse_args()
 
     def compile(self, program_file):    
         scan = scanner.Scanner()
@@ -29,6 +36,7 @@ class Compiler(object):
             
             vm = magic_machine(vm_code)
             vm.run()
+            
             print(vm.get_symbol_table())
             print(vm.get_stack())
             print(vm.get_label_table())
@@ -36,8 +44,10 @@ class Compiler(object):
 
 
 def main():
+
     comp = Compiler()
-    comp.compile("./program.magic")
+    args = comp.parseArguments()
+    comp.compile(args.file)
 
 
 if __name__=="__main__":

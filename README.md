@@ -1,7 +1,7 @@
 # Magic Compiler
-Das Projekt für unsere Projektarbeit in dem Fach Compilerbau.
+Hier stellen wir den Compiler der neuen Programmiersprache *Magic* vor!
 
-# Anforderungen
+# Vorraussetzungen
 Python 3.x muss intalliert sein. 
 
 # Aufruf
@@ -31,12 +31,6 @@ i = 5;
 res = fac(i);
 ```
 
-# Themenvergabe
-Scanner - Vannessa  
-Parser - Benedikt  
-Kellermaschine - Arne  
-Code Erzeugung - René  
-Code Optimierung - Fabian  
 
 # Grammatik
 Die funktionale Programmiersprache die wir bauen werden heißt Magic. Alle notwendigen Grammatik Daten vom aktuellen Stand befinden sich in dem File grammatik.txt
