@@ -5,7 +5,7 @@ ReserveWords = [ ";", ",", "(", ")", "=", "+", "-", "*", "/", "{", "}", "magic",
 -->
 
 MagicCode -> Statement
-Statement -> Statement; Statement #Falsch?
+Statement 
           -> AssignmentStatement; Statement                       { statement.f(z) = statement.f(AssignmentStatement.f(z))}
           -> ApplicationStatement; Statement
           -> FunctionDefinition; Statement
@@ -61,7 +61,6 @@ FunctionDefinition -> 'magic' identifier '(' parameter ')' '{' statement '}'
 conditional  -> 'if' '(' boolExpression ')' '{' statements '}' cond_else
 cond_else    -> 'else' '{' statements '}'
              -> ε
-             # was mit if (Fragen an Ritschel)
-             # wie expression zu logischen ausdrücken erweitern ?
+            
 
 ReturnStatement -> 'return' var_num | 'return' var_bool | 'return' var_string | 'return' ApplicationStatement
