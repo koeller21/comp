@@ -63,4 +63,4 @@ cond_else    -> 'else' '{' statements '}'
              # was mit if (Fragen an Ritschel)
              # wie expression zu logischen ausdrücken erweitern ?
 
-ReturnStatement -> 'return' var_num | 'return' var_bool | 'return' var_string
+ReturnStatement -> 'return' var_num | 'return' var_bool | 'return' var_string | 'return' ApplicationStatement

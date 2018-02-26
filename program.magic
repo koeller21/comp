@@ -1,14 +1,27 @@
 
 # hallo
+# todo 
+# rekursion machen
+# stack aufraeumen wenn es geht
+# strings? imports?
+# print befehl
 
-magic abc(a){
-  k = a + 1;
-  return k; 
+magic fac(n){
+  if( n == 1){
+    return 1;
+  }else{
+    a = n - 1;
+    b = fac(a);
+    c = b * n;
+    return c;
+  }
+  
 }
 
-c = 2;
 
-x = abc(c);
+i = 2;
+
+erg = fac(i);
 
 
 

@@ -127,7 +127,6 @@ class Parser(object):
 
         if self.identifier(syntax_tree):
             if self.match(equalsSet, syntax_tree):
-
                 if self.lookAhead(varExpressionSet) or self.cur_token.get_next().get_next().get_token_type() in varOperatorSet :
                     return self.expression(syntax_tree.insertSubtree(token.EXPRESSION))
                 elif self.lookAhead(varBoolSet) or self.cur_token.get_next().get_next().get_token_type() in [token.AND_LOGIC, token.OR_LOGIC]:
@@ -308,10 +307,16 @@ class Parser(object):
             syntax_tree.insertSubtree(token.EPSILON)
             return True
 
-    # ReturnStatement -> 'return' var_num | 'return' var_bool | 'return' var_string
+    # ReturnStatement -> 'return' var_num | 'return' var_bool | 'return' var_string | 'return' ApplicationStatement
     def return_statement(self, syntax_tree):
         varSet = [token.VAR_BOOL, token.VAR_NUM, token.VAR_STRING, token.IDENTIFIER]
-        return self.match([token.RETURN], syntax_tree) and self.match(varSet, syntax_tree)
+        # return self.match([token.RETURN], syntax_tree) and self.match(varSet, syntax_tree)
+
+        if self.match([token.RETURN], syntax_tree):
+            if self.lookAhead(varSet) and self.cur_token.get_next().get_next().get_token_type() != token.OPEN_PARA:
+                return self.match(varSet, syntax_tree)
+            elif self.lookAhead([token.IDENTIFIER]) and self.cur_token.get_next().get_next().get_token_type() == token.OPEN_PARA:
+                return self.application_statement(syntax_tree.insertSubtree(token.APPLICATION))
 
     # applicationStatement -> identifier '(' parameter ')'
     def application_statement(self, syntax_tree):

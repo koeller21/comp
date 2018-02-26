@@ -1,3 +1,5 @@
+import time
+
 FUNCTION = ";FUNCTION "
 POP_VARIABLE = ";POP VARIABLE "
 PUSH_CONSTANT = ";PUSH CONSTANT "
@@ -15,9 +17,12 @@ AND = ";AND"
 
 ST = ";ST"
 GT = ";GT"
+EQ = ";EQ"
+NEQ = ";NEQ"
 GOFALSE = ";GOFALSE"
 GOTRUE = ";GOTRUE"
 LABEL = ";LABEL"
+
 
 
 class magic_machine():
@@ -33,9 +38,20 @@ class magic_machine():
         self.symbol_table = []
         self.function_table = []
         self.build_function_table()
-        self.function_pointer = 0 # will be obsolet
-        #self.global_stack = []
+        self.function_stack = []
 
+    ################ function stack methoden ##############
+
+    def push_function_stack(self, value):
+        self.function_stack.insert(0, value)
+
+    def pop_function_stack(self):
+        val = self.function_stack[0]
+        self.function_stack.pop(0)
+        return val
+
+    def get_function_stack(self):
+        return self.function_stack
 
     ################ function table methoden ##############
 
@@ -116,6 +132,7 @@ class magic_machine():
     def run(self):
 
         while self.ip < len(self.code_memory):
+            time.sleep(1)
             self.interpret(self.code_memory[self.ip])
             print(self.get_stack())
             print(self.get_symbol_table())
@@ -126,8 +143,7 @@ class magic_machine():
         print(code)
         
         if PUSH_CONSTANT[1:-1] in code:
-            self.push_stack(code[len(PUSH_CONSTANT[1:]):])
-            #print(self.get_stack())            
+            self.push_stack(code[len(PUSH_CONSTANT[1:]):])         
         elif POP_VARIABLE[1:-1] in code:
             val = self.pop_stack()
             self.add_to_symbol_table(code[len(POP_VARIABLE[1:]):], val)
@@ -137,8 +153,6 @@ class magic_machine():
                 print("No such variable initialized: " + code[len(PUSH_VARIABLE[1:]):])
                 exit(-1)
             self.push_stack(val)
-            #print(self.get_stack())
-            
         elif MUL[1:] in code:
             val2 = self.pop_stack()
             val1 = self.pop_stack()
@@ -183,8 +197,21 @@ class magic_machine():
                 self.push_stack(1)
             else:
                 self.push_stack(0)
+        elif EQ[1:] in code:
+            val2 = self.pop_stack()
+            val1 = self.pop_stack()
+            if int(val1) == int(val2):
+                self.push_stack(1)
+            else:
+                self.push_stack(0)
+        elif NEQ[1:] in code:
+            val2 = self.pop_stack()
+            val1 = self.pop_stack()
+            if int(val1) != int(val2):
+                self.push_stack(1)
+            else:
+                self.push_stack(0)
         elif GOFALSE[1:] in code:
-            #print(self.get_stack())
             val = self.pop_stack()
             if val == 0:
                 new_ip = self.get_label_position(code[8:])
@@ -201,10 +228,11 @@ class magic_machine():
                     self.ip = counter
  
         elif RETURN[1:] in code:
-            self.ip = self.function_pointer
-        elif CALL[1:] in code:
+            print("================ " + str(self.get_function_stack()))
+            self.ip = self.pop_function_stack()
             
-            self.function_pointer = self.ip
+        elif CALL[1:] in code:
+            self.push_function_stack(self.ip)
             func_name = code[5:]
             new_ip = self.get_position_of_function(func_name)
             if new_ip != None:

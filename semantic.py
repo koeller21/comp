@@ -256,7 +256,7 @@ class Semantic():
 		closed_curly = top.children[7]
 
 
-		return magic_machine.FUNCTION + self.semantic_identifier(identifier) + self.semantic_argument(argument) + self.semantic_statement(stmt, "") + magic_machine.RETURN
+		return magic_machine.FUNCTION + self.semantic_identifier(identifier) + self.semantic_argument(argument) + self.semantic_statement(stmt, "") 
 
 	def semantic_argument(self, top):
 		if len(top.children) == 2:
@@ -279,7 +279,7 @@ class Semantic():
 		elif len(top.children) == 1:
 			return n
 
-	# ReturnStatement -> 'return' var_num | 'return' var_bool | 'return' var_string | 'return' identifier
+	# ReturnStatement -> 'return' var_num | 'return' var_bool | 'return' var_string | 'return' identifier | 'return' ApplicationStatement
 	def semantic_return(self, top):
 
 		if len(top.children) == 2:
@@ -287,11 +287,14 @@ class Semantic():
 			var = top.children[1]
 
 			if var.get_token() == "IDENTIFIER":
-				return magic_machine.PUSH_VARIABLE + self.semantic_identifier(var)
-			if var.get_token() == "VAR_NUM":
-				return magic_machine.PUSH_CONSTANT + self.semantic_var_num(var)
-			if var.get_token() == "VAR_BOOL":
-				return magic_machine.PUSH_CONSTANT + self.semantic_var_bool(var)
+				return magic_machine.PUSH_VARIABLE + self.semantic_identifier(var) + magic_machine.RETURN 
+			elif var.get_token() == "VAR_NUM":
+				return magic_machine.PUSH_CONSTANT + self.semantic_var_num(var) + magic_machine.RETURN 
+			elif var.get_token() == "VAR_BOOL":
+				return magic_machine.PUSH_CONSTANT + self.semantic_var_bool(var) + magic_machine.RETURN 
+			elif var.get_token() == "APPLICATION":
+				return self.semantic_application_statement(var) + magic_machine.RETURN 
+		
 
 
 	# ApplicationStatement -> FunctionName '(' 'parameter' ')'
