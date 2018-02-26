@@ -14,6 +14,22 @@ Das Programm muss mit der Datei  Dateiname.magic geschrieben werden.
 Um eine Funktion zu definieren, muss das Wort "magic" vor dem Funktionsnamen geschrieben sein. Siehe Beispiel:
   
 # Beispiel
+### Fakultät 
+```
+magic fac(n){
+  if( n == 1){
+    return 1;
+  }else{
+    a = n - 1;
+    k = fac(a);
+    x = k * n;
+    return x;
+  }
+}
+
+i = 5;
+fac(i);
+```
 
 # Themenvergabe
 Scanner - Vannessa  
