@@ -6,7 +6,7 @@ import token
 class Scanner(object):
 
     def __init__(self):
-        self.separators = ["{",";","(",")",",","}","*","/","+","-","=","<",">","&&","||", "==", "!="] #TODO da muessen alle hin
+        self.separators = ["{",";","(",")",",","}","*","/","+","-","%","=","<",">","&&","||", "==", "!="] #TODO da muessen alle hin
 
     def read_program(self, prog):
 

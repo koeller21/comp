@@ -1,9 +1,6 @@
 
 # hallo
 # todo 
-# rekursion machen
-# return immer im else?
-# strings? imports?
 # print befehl
 
 #magic fac(n){
@@ -15,21 +12,53 @@
 #  }  
 #}
 
-magic fac(n){
-  if( n == 1){
-    return 1;
+#magic fac(n){
+#  if( n == 1){
+#    return 1;
+#  }else{
+#    a = n - 1;
+#    k = fac(a);
+#    x = k * n;
+#    return x;
+#  }
+#}
+
+#magic abc(a){
+#  x = a * 2;
+#  if( x < 15){
+#    return x;
+#  }
+#  return 0;
+#}
+
+
+
+
+#i = 5;
+
+#erg = abc(i);
+
+# 1. Primzahlen bestimmen (moeglichst gross)
+p = 17;
+q = 11;
+
+# 2. n berechnen
+n = p * q;
+
+# 3. phi(n) berechnen
+phi = (p-1) * (q-1);
+
+# 4. e festlegen mit der Annahme e ist teilerfremd zu phi(n) ausgedrueckt: gcd(e, phi(n))=1
+e = 7; 
+ 
+magic egcd(a, b){
+  if( b == 0){
+
   }else{
-    a = n - 1;
-    k = fac(a);
-    x = k * n;
-    return x;
+    
   }
 }
 
-
-i = 5;
-
-erg = fac(i);
 
 
 

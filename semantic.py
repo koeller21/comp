@@ -115,7 +115,8 @@ class Semantic():
 				return n + self.semantic_rightTerm(rightTerm, self.semantic_operator(operator)) + magic_machine.MUL
 			elif op.get_token() == token.DIV: #{ rightTerm.f(z) = z / rightTerm.f(operator.f(z)) }
 				return n + self.semantic_rightTerm(rightTerm, self.semantic_operator(operator)) + magic_machine.DIV
-
+			elif op.get_token() == token.MOD: #{ rightTerm.f(z) = z % rightTerm.f(operator.f(z)) }
+				return n + self.semantic_rightTerm(rightTerm, self.semantic_operator(operator)) + magic_machine.MOD
 
 	def semantic_rightExpression(self, top, n):
 		if len(top.children) == 1:

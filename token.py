@@ -12,6 +12,7 @@ PLUS = "PLUS"
 MINUS = "MINUS"
 MUL = "MUL"
 DIV = "DIV"
+MOD = "MOD"
 OPEN_CURLY = "OPEN_CURLY"
 CLOSED_CURLY = "CLOSED_CURLY"
 IS_EQUAL = "IS_EQUAL"
@@ -73,6 +74,8 @@ def getWordToToken(word):
         token_t = MUL
     elif word == "/":
         token_t = DIV
+    elif word == "%":
+        token_t = MOD
     elif word == "{":
         token_t = OPEN_CURLY
     elif word == "}":

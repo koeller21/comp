@@ -159,9 +159,9 @@ class Parser(object):
     def term(self, syntax_tree):
         return self.operator(syntax_tree.insertSubtree(token.OPERATOR)) and self.rightTerm(syntax_tree.insertSubtree(token.RIGHTTERM))
 
-    #     rightTerm -> '*' operator rightTerm | ‘/' operator rightTerm |  ε
+    #     rightTerm -> '*' operator rightTerm | '/' operator rightTerm | '%' operator rightTerm | ε
     def rightTerm(self, syntax_tree):
-        compOpSet = [token.MUL, token.DIV]
+        compOpSet = [token.MUL, token.DIV, token.MOD]
 
         if self.match(compOpSet, syntax_tree):
             return self.operator(syntax_tree.insertSubtree(token.OPERATOR)) and self.rightTerm(syntax_tree.insertSubtree(token.RIGHTTERM))

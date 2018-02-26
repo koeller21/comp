@@ -11,6 +11,7 @@ MUL = ";MUL"
 DIV = ";DIV"
 ADD = ";ADD"
 SUB = ";SUB"
+MOD = ";MOD"
 
 OR = ";OR"
 AND = ";AND"
@@ -187,6 +188,11 @@ class magic_machine():
             val2 = self.pop_stack()
             val1 = self.pop_stack()
             result = int(val1) - int(val2)
+            self.push_stack(result)
+        elif MOD[1:] in code:
+            val2 = self.pop_stack()
+            val1 = self.pop_stack()
+            result = int(val1) % int(val2)
             self.push_stack(result)
         elif AND[1:] in code:
             val2 = self.pop_stack()

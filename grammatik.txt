@@ -26,7 +26,8 @@ AssignmentStatement -> identifier '=' expression
         rightExpression -> ε                                      { rightExpression.f(z) = z }
         term -> operator rightTerm                                { term.f(z) = rightTerm.f(operator.f(z))  }
         rightTerm -> '*' operator rightTerm                       { rightTerm.f(z) = z * rightTerm.f(operator.f(z)) }
-        rightTerm -> ‘/' operator rightTerm                       { rightTerm.f(z) = z / rightTerm.f(operator.f(z)) }
+        rightTerm -> '/' operator rightTerm                       { rightTerm.f(z) = z / rightTerm.f(operator.f(z)) }
+        rightTerm -> '%' operator rightTerm                       { rightTerm.f(z) = z % rightTerm.f(operator.f(z)) }
         rightTerm -> ε                                            { rightTerm.f(z) = z }
         operator -> '(' expression ')' | var_num | identifier     { operator.f(z) = ( expression.f(z) ) } {operator.f(z) = identifier.f(z)} {operator.f(z) = var_num.f(z)} {var_num.f(z) = 1 | 2 | 3 | ...}
 
