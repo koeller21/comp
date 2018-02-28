@@ -1,0 +1,17 @@
+
+magic fac(n){
+  if( n == 1){
+    return 1;
+  }else{
+    a = n - 1;
+    k = fac(a);
+    x = k * n;
+    return x;
+  }
+}
+
+i = 10;
+
+erg = fac(i);
+
+# erg sollte sein: 3.628.800

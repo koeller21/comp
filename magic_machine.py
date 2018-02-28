@@ -29,10 +29,15 @@ LABEL = ";LABEL"
 class magic_machine():
     
     
-    def __init__(self, vm_code):
+    def __init__(self, vm_code, debug_mode):
+
+        self.debug_mode = debug_mode
+
         self.ip = 0 #instruction pointer
         self.code_memory = vm_code.split(";")[1:]
-        print(self.code_memory)
+        
+        if debug_mode:
+            print("Code Memory : " + str(self.code_memory))
         
         self.label_table = []
         self.build_label_table() #build initial label table
@@ -147,17 +152,22 @@ class magic_machine():
     def run(self):
 
         while self.ip < len(self.code_memory):
-            #time.sleep(1)
+            
+            if self.debug_mode: # execute slowly in debug mode
+                time.sleep(1)
+            
             self.interpret(self.code_memory[self.ip])
-            print("Stack : " + str(self.get_stack()))
-            print("Symbol Tabellen :" + str(self.get_symbol_table()))
-            print("Function Stack : " + str(self.get_function_stack()))
-            print("============")
+            
+            if self.debug_mode: # print states of vm 
+                print("Command : " + str(self.code_memory[self.ip]))
+                print("Stack : " + str(self.get_stack()))
+                print("Symbol Tabellen :" + str(self.get_symbol_table()))
+                print("Function Stack : " + str(self.get_function_stack()))
+                print("============")
+
             self.ip = self.ip + 1
 
     def interpret(self, code):
-        print(code)
-        
         if PUSH_CONSTANT[1:-1] in code:
             self.push_stack(code[len(PUSH_CONSTANT[1:]):])         
         elif POP_VARIABLE[1:-1] in code:

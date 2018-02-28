@@ -1,0 +1,32 @@
+# Beispielanwendungen der Sprache Magic
+# 1. Zahlenarithmetik
+
+a = 4;
+b = a;
+
+c = (a + b) / b; 
+# c sollte 2 sein
+
+d = a + b / 2; 
+# d sollte 6 sein
+
+# 2. Boolsche-Algebra
+
+x = true;
+y = false;
+
+z = true && ( y || x );
+# z sollte true oder 1 sein
+
+# 3. if-else Bedingungen mit Funktionsaufruf
+
+magic noteneinteiler(note){
+    if( (note < 3) || (note == 3) ){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+note = 1;
+note = noteneinteiler(note);

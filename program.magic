@@ -1,44 +1,6 @@
+# Implementierung RSA-Algorithmus
 
-# hallo
-# todo 
-# print befehl
-
-#magic fac(n){
-#  if( n < 3){
-#    k = 1 + n;
-#    return fac(k);
-#  }else{
-#    return n;
-#  }  
-#}
-
-#magic fac(n){
-#  if( n == 1){
-#    return 1;
-#  }else{
-#    a = n - 1;
-#    k = fac(a);
-#    x = k * n;
-#    return x;
-#  }
-#}
-
-#magic abc(a){
-#  x = a * 2;
-#  if( x < 15){
-#    return x;
-#  }
-#  return 0;
-#}
-
-
-
-
-#i = 5;
-
-#erg = abc(i);
-
-# 1. Primzahlen bestimmen (moeglichst gross)
+# 1. Primzahlen bestimmen (eig. moeglichst gross)
 p = 17;
 q = 11;
 
