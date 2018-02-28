@@ -30,3 +30,4 @@ magic noteneinteiler(note){
 
 note = 1;
 note = noteneinteiler(note);
+# note sollte hier 1 sein

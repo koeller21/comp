@@ -5,8 +5,7 @@ ReserveWords = [ ";", ",", "(", ")", "=", "+", "-", "*", "/", "{", "}", "magic",
 -->
 
 MagicCode -> Statement
-Statement 
-          -> AssignmentStatement; Statement                       { statement.f(z) = statement.f(AssignmentStatement.f(z))}
+Statement -> AssignmentStatement; Statement                       { statement.f(z) = statement.f(AssignmentStatement.f(z))}
           -> ApplicationStatement; Statement
           -> FunctionDefinition; Statement
           -> conditional; Statement
@@ -52,11 +51,10 @@ ApplicationStatement -> FunctionName(parameter)
           -> ε
 
 FunctionDefinition -> 'magic' identifier '(' parameter ')' '{' statement '}'
-
-            parameter -> identifier R
-                      -> ε
-            R -> ',' parameter R
-              -> ε
+parameter          -> identifier R
+                   -> ε
+R                  -> ',' parameter R
+                   -> ε
 
 conditional  -> 'if' '(' boolExpression ')' '{' statements '}' cond_else
 cond_else    -> 'else' '{' statements '}'

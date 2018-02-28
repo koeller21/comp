@@ -1,0 +1,56 @@
+# Implementierung Taylor-Polynom fuer e^x
+# 
+
+# power to calculate x^n
+magic power(x, n){
+  if( n == 0 ){
+    return 1;
+  }else{
+    y = n-1;
+    res = power(x, y);
+    res = x * res;
+    return res;
+  }
+}
+
+# fac to calculate n!
+magic fac(n){
+  if( n == 1){
+    return 1;
+  }else{
+    a = n - 1;
+    k = fac(a);
+    x = k * n;
+    return x;
+  }
+}
+
+magic e_taylor(n, x, tb){
+  
+  if( n > 1000){
+    return 0;
+  }else{
+
+    nom = power(x, n);
+
+    denom = fac(n);
+
+    term = nom / denom;
+
+
+    n = n + 1;
+
+
+    a = e_taylor(n, x, term);
+    b = term + a;
+    return b;
+  }
+}
+
+
+n = 1;
+x = 2;
+start = 1;
+
+res = e_taylor(n, x, start);
+

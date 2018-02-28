@@ -53,7 +53,11 @@ def main():
     if args.debug == "true":
         debug_mode = True 
     
-    comp.compile(args.file, debug_mode)
+    if args.file.lower().endswith("magic"):
+        comp.compile(args.file, debug_mode)
+    else:
+        print("Check if File-Extension is .magic ")
+        exit()
 
 
 if __name__=="__main__":

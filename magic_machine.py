@@ -159,7 +159,7 @@ class magic_machine():
             self.interpret(self.code_memory[self.ip])
             
             if self.debug_mode: # print states of vm 
-                print("Command : " + str(self.code_memory[self.ip]))
+                print("Command : " + str(self.code_memory[self.ip]) + " || Code Memory Position : " + str(self.ip))
                 print("Stack : " + str(self.get_stack()))
                 print("Symbol Tabellen :" + str(self.get_symbol_table()))
                 print("Function Stack : " + str(self.get_function_stack()))
