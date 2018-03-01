@@ -1,4 +1,7 @@
 # Magic Compiler
+![Alt Text](https://media.giphy.com/media/12NUbkX6p4xOO4/giphy.gif)
+
+
 Hier stellen wir den Compiler der neuen Programmiersprache *Magic* vor!
 
 In Zusammenarbeit mit:
