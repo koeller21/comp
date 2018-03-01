@@ -12,16 +12,87 @@ In Zusammenarbeit mit:
 Python 3.x muss intalliert sein. 
 
 # Aufruf
-python compiler.py
+python compiler.py filename.magic
 
 # Programm
-Das Programm muss mit der Datei  Dateiname.magic geschrieben werden.
+Das Programm muss mit der Datei Dateiname.magic geschrieben werden.
 
 # Magic
 Um eine Funktion zu definieren, muss das Wort "magic" vor dem Funktionsnamen geschrieben sein. Siehe Beispiel:
-  
+
+# Funktionalität von Magic
+## Verfügbare Operationen
+```
++ Addition
+- Subtraktion
+/ Division
+* Multiplikation
+% Modulo
+
+#===========================
+
+&& Logisches UND
+|| Logisches ODER
+< Kleiner
+> Größer
+== Logisches GLEICH
+!= Logisches UNGLEICH
+```
+## Variablen Deklaration
+```
+a = 3;
+b = 3 * 4; 
+c = true;
+d = true && false;
+e = 5 * (b -2);
+```
+## Funktions Deklaration & Aufruf
+
+### mit Funktionsparametern
+```
+magic simple_add(a, b)
+{
+  c = a + b;
+  return c;
+}
+
+a = 10;
+b = 20;
+
+simple_add(a, b);
+```
+### ohne Funktionsparameter
+```
+magic give_me_five()
+{
+  return 5;
+}
+
+x = give_me_five();
+```
+
+## Conditional Statements
+```
+if (2 < 3)
+{
+  x = 10;
+}else{
+  x = 20;
+}
+```
+```
+a = true;
+b = false;
+
+if( a || b)
+{
+  c = true;
+}else{
+  c = false;
+}
+```
 # Beispiel
-### Fakultät berechnen
+### Fakultät berechnen (Rekursion)
 ```
 magic fac(n){
   if( n == 1){
