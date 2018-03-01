@@ -47,7 +47,7 @@ a = 3;
 b = 3 * 4; 
 c = true;
 d = true && false;
-e = 5 * (b -2);
+e = 5 * (b - 2);
 ```
 ## Funktions Deklaration & Aufruf
 
